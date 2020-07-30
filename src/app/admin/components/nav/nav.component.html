@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      Admin Menu
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/admin/products/create">Add product</a>
+      <a mat-list-item routerLink="/admin/products">Product List</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>platzi-store</span>
+      <div class="buttons">
+        <a class="btn-nav" mat-raised-button routerLink="products/create">Create product</a>
+        <button class="btn-nav" mat-raised-button (click)="logout()">Sign Out</button>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="card-container">
+      <mat-card>
+        <mat-card-title>Welcome to the Admin menu</mat-card-title>
+        <mat-card-content>Use the side nav to view the list of products. In there you can create, edit and delete the products in the page.</mat-card-content>
+      </mat-card>
+    </div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
